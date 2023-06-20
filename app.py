@@ -133,19 +133,26 @@ def home():
         "ZWD": "Zimbabwe Dollar",
     }
 
-    # Get request from api
+    # Get request from api/Turn into JSON to retrieve data from a JSON Dictionary
     url = f"https://api.exchangerate.host/convert?from={currency_from}&to={currency_to}&amount={amount}"
-
     response = requests.get(url)
     data = response.json()
+
+    #Grab currency symbol corresponded to the currency we want to convert to 
     currency_symbol = CurrencySymbols.get_symbol(data["query"]["to"])
+
+    #Converted amount
     result = data["result"]
-    error_message = None
+
     # Validation Checks
+    error_message = None
+    #Check to see if the currency from/to are filled in
     if not currency_from or not currency_to:
         error_message = "Please provide two currencies"
+    #Check to see if the currencies are valid
     elif currency_from not in currencies_list or currency_to not in currencies_list:
         error_message = "Please provide a valid currency"
+    #Check to see if amount is filled in and is a number
     elif not amount or not amount.isdigit():
         error_message = "Please provide a valid amount"
     # If there is a incorrect input...
