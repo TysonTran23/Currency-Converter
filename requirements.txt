@@ -1,10 +1,15 @@
 autopep8==1.4.4
 blinker==1.6.2
+certifi==2023.5.7
+charset-normalizer==3.1.0
 Click==7.0
 Flask==1.1.1
 Flask-DebugToolbar==0.13.1
+idna==3.4
 itsdangerous==1.1.0
 Jinja2==2.10.3
 MarkupSafe==1.1.1
 pycodestyle==2.5.0
+requests==2.31.0
+urllib3==2.0.3
 Werkzeug==0.16.0
