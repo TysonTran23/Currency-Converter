@@ -6,6 +6,7 @@
     <title>Home</title>
   </head>
   <body>
+    <h1>Currency Converter</h1>
     <form action="/">
       <label for="from">Converting from</label>
       <input type="text" name="from" id="" />
@@ -17,9 +18,9 @@
       <input type="text" name="amount" id="" />
 
       <button>Convert</button>
-      <h2>{{error_message}}</h2>
 
-      <h2>{{result}}</h2>
     </form>
+    <h2>{{error_message}}</h2>
+    <h2>The result is {{currency}}{{result}}</h2>
   </body>
 </html>

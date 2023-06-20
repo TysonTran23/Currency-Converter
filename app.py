@@ -1,4 +1,5 @@
 import requests
+from currency_symbols import CurrencySymbols
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -137,17 +138,20 @@ def home():
 
     response = requests.get(url)
     data = response.json()
+    currency_symbol = CurrencySymbols.get_symbol(data["query"]["to"])
     result = data["result"]
     error_message = None
-    #Validation Checks
+    # Validation Checks
     if not currency_from or not currency_to:
         error_message = "Please provide two currencies"
     elif currency_from not in currencies_list or currency_to not in currencies_list:
         error_message = "Please provide a valid currency"
     elif not amount or not amount.isdigit():
         error_message = "Please provide a valid amount"
-    #If there is a incorrect input...
+    # If there is a incorrect input...
     if error_message:
         return render_template("index.html", error_message=error_message)
 
-    return render_template("index.html", result="%.2f" % result)
+    return render_template(
+        "index.html", result="%.2f" % result, currency=currency_symbol
+    )
